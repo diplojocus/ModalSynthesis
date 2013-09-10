@@ -16,7 +16,6 @@ MainContentComponent::MainContentComponent()
     setSize (1000, 400);
 	
 	theAudioCore = new AudioCore(this, String("/Users/joe/Desktop/Hadopelagic.wav"));
-	theSampleArray = Array<float>();
 }
 
 MainContentComponent::~MainContentComponent()
@@ -26,14 +25,24 @@ MainContentComponent::~MainContentComponent()
 void MainContentComponent::paint (Graphics& g)
 {
     g.fillAll (Colours::white);
-	for (int i = 0; i < getWidth(); i++)
+	Path fftPath = Path();
+	float *samples = theAudioCore->buffer.getSampleData(0);
+
+	int numSamples = theAudioCore->bufferSize/2 + 1;
+	for (int i = 0; i < numSamples; i++)
 	{
-		int sampleIndex = ((float)i / (float)getWidth()) * theAudioCore->bufferSize;
-		float sample = theSampleArray[sampleIndex];
-		sample += 1.0f;
-		sample *= 0.5f;
-		g.drawLine((float)i, sample*getHeight(), (float)i, getHeight()-sample*getHeight());
+		float sample = samples[i];
+		float startX = ((float)i / (float)numSamples) * getWidth();
+		if (i == 0)
+		{
+			fftPath.startNewSubPath(startX, getHeight()-sample*getHeight());
+		}
+		else
+		{
+			fftPath.lineTo(startX, getHeight()-sample*getHeight());
+		}
 	}
+	g.strokePath(fftPath, PathStrokeType(2.0f));
 }
 
 void MainContentComponent::resized()
@@ -45,6 +54,5 @@ void MainContentComponent::resized()
 
 void MainContentComponent::changeListenerCallback(ChangeBroadcaster* source)
 {
-	theSampleArray = Array<float>(theAudioCore->buffer.getSampleData(0));
 	repaint();
 }
