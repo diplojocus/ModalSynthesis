@@ -9,14 +9,14 @@
 */
 
 #include "AudioCore.h"
-#include "kiss_fft.h"
+#include "kiss_fftr.h"
 
 AudioCore::AudioCore(ChangeListener *listener, const String &filePath):
 	buffer(AudioSampleBuffer(1, 0))
 {
 	addChangeListener(listener);
 
-	bufferSize = 128;
+	bufferSize = 1024;
 	
 	File audioFile(filePath);
 	AudioFormatManager formatManager;
@@ -27,26 +27,23 @@ AudioCore::AudioCore(ChangeListener *listener, const String &filePath):
 		buffer = AudioSampleBuffer(reader->numChannels, bufferSize);
 		reader->read(&buffer, 0, bufferSize, 0, true, true);
 		
-		kiss_fft_cfg cfg;
-		if ((cfg = kiss_fft_alloc(bufferSize, 1, NULL, NULL)) != NULL)
+		kiss_fftr_cfg cfg;
+		if ((cfg = kiss_fftr_alloc(bufferSize, 0, NULL, NULL)) != NULL)
 		{
 			float *sampleBuffer = buffer.getSampleData(0);
-			kiss_fft_cpx inputBuffer[bufferSize];
 			kiss_fft_cpx outputBuffer[(bufferSize/2)+1];
 			for (int i = 0; i < bufferSize; i++)
 			{
 				float hanningCoeff = 0.5 * (1 - cosf(2*M_PI*i/(bufferSize-1)));
-				inputBuffer[i].r = sampleBuffer[i] * hanningCoeff;
-				inputBuffer[i].i = 0;
+				sampleBuffer[i] *= hanningCoeff;
 			}
-			kiss_fft(cfg, inputBuffer, outputBuffer);
-			
-			for (int i = 0; i < bufferSize/2; i++)
+			kiss_fftr(cfg, sampleBuffer, outputBuffer);
+			for (int i = 0; i < bufferSize/2+1; i++)
 			{
 				sampleBuffer[i] = sqrtf((outputBuffer[i].r * outputBuffer[i].r) + (outputBuffer[i].i * outputBuffer[i].i));
-				printf("%f\n", *(sampleBuffer+i));
+				sampleBuffer[i] /= sqrtf(bufferSize);
 			}
-			printf("\n");
+			sampleBuffer[0] = 0.0f; // [0] = DC Offset
 		}
 		sendChangeMessage();
 	}

@@ -26,21 +26,16 @@ void MainContentComponent::paint (Graphics& g)
 {
     g.fillAll (Colours::white);
 	Path fftPath = Path();
+	fftPath.startNewSubPath(0, getHeight());
+	
 	float *samples = theAudioCore->buffer.getSampleData(0);
-
-	int numSamples = theAudioCore->bufferSize/2 + 1;
+	int numSamples = theAudioCore->bufferSize/2+1;
+	
 	for (int i = 0; i < numSamples; i++)
 	{
 		float sample = samples[i];
 		float startX = ((float)i / (float)numSamples) * getWidth();
-		if (i == 0)
-		{
-			fftPath.startNewSubPath(startX, getHeight()-sample*getHeight());
-		}
-		else
-		{
-			fftPath.lineTo(startX, getHeight()-sample*getHeight());
-		}
+		fftPath.lineTo(startX, getHeight()-sample*getHeight());
 	}
 	g.strokePath(fftPath, PathStrokeType(2.0f));
 }

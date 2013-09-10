@@ -5,7 +5,10 @@
   <MAINGROUP id="e34ZvC" name="FootstepSynthesis">
     <GROUP id="{CA64169D-26E6-3307-E78F-4F1C7F9C35D5}" name="Source">
       <GROUP id="{57E55B4C-7063-4335-0B5E-63C1BF318A9A}" name="kiss_fft">
+        <FILE id="VKUHpc" name="_kiss_fft_guts.h" compile="0" resource="0"
+              file="Source/kiss_fft/_kiss_fft_guts.h"/>
         <FILE id="BlVDx2" name="kiss_fft.h" compile="0" resource="0" file="Source/kiss_fft/kiss_fft.h"/>
+        <FILE id="lyRILG" name="kiss_fft.c" compile="1" resource="0" file="Source/kiss_fft/kiss_fft.c"/>
         <FILE id="JYd7NX" name="kiss_fftr.c" compile="1" resource="0" file="Source/kiss_fft/kiss_fftr.c"/>
         <FILE id="Lop1At" name="kiss_fftr.h" compile="0" resource="0" file="Source/kiss_fft/kiss_fftr.h"/>
       </GROUP>
