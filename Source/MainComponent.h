@@ -12,6 +12,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 class AudioCore;
+class TimeView;
+class FrequencyView;
 
 //==============================================================================
 /*
@@ -35,6 +37,8 @@ private:
 	float scale;
 	
 	ScopedPointer<AudioCore> theAudioCore;
+	ScopedPointer<TimeView> theTimeView;
+	ScopedPointer<FrequencyView> theFrequencyView;
 	
 	void changeListenerCallback(ChangeBroadcaster* source);
 };

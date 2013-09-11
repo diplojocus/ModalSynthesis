@@ -13,11 +13,16 @@
         <FILE id="Lop1At" name="kiss_fftr.h" compile="0" resource="0" file="Source/kiss_fft/kiss_fftr.h"/>
       </GROUP>
       <FILE id="HTZ2tq" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="GcF4uN" name="AudioCore.h" compile="0" resource="0" file="Source/AudioCore.h"/>
+      <FILE id="HChcaz" name="AudioCore.cpp" compile="1" resource="0" file="Source/AudioCore.cpp"/>
       <FILE id="VWlGds" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="xj0qOL" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
-      <FILE id="GcF4uN" name="AudioCore.h" compile="0" resource="0" file="Source/AudioCore.h"/>
-      <FILE id="HChcaz" name="AudioCore.cpp" compile="1" resource="0" file="Source/AudioCore.cpp"/>
+      <FILE id="YtCufo" name="TimeView.cpp" compile="1" resource="0" file="Source/TimeView.cpp"/>
+      <FILE id="oo51GJ" name="TimeView.h" compile="0" resource="0" file="Source/TimeView.h"/>
+      <FILE id="aym7W2" name="FrequencyView.cpp" compile="1" resource="0"
+            file="Source/FrequencyView.cpp"/>
+      <FILE id="SL7FZY" name="FrequencyView.h" compile="0" resource="0" file="Source/FrequencyView.h"/>
     </GROUP>
   </MAINGROUP>
   <MODULES>
