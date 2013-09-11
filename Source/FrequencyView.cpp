@@ -14,38 +14,30 @@
 //==============================================================================
 FrequencyView::FrequencyView()
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
+	numSamples = 0;
+	buffer = NULL;
 }
 
 FrequencyView::~FrequencyView()
 {
+	buffer = NULL;
 }
 
 void FrequencyView::paint (Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (Colours::white);   // clear the background
-
-    g.setColour (Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (Colours::lightblue);
-    g.setFont (14.0f);
-    g.drawText ("FrequencyView", getLocalBounds(),
-                Justification::centred, true);   // draw some placeholder text
+    g.fillAll (Colours::lightblue);
+	Path fftPath = Path();
+	fftPath.startNewSubPath(0, getHeight());
+	for (int i = 1; i < numSamples; i++)
+	{
+		float binFrequency = freqStart * i;
+		float xScale = log10f(binFrequency/freqStart) / freqScale;
+		float sample = buffer[i];
+		fftPath.lineTo(getWidth()*xScale, getHeight()-sample*getHeight());
+	}
+	g.strokePath(fftPath, PathStrokeType(2.0f));
 }
 
 void FrequencyView::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
 }

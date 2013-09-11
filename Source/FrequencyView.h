@@ -25,9 +25,14 @@ public:
     void paint (Graphics&);
     void resized();
 
+	float *buffer;
+	int numSamples;
+	float freqStart;
+	float freqEnd;
+	float freqScale;
+	
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FrequencyView)
 };
-
 
 #endif  // FREQUENCYVIEW_H_INCLUDED

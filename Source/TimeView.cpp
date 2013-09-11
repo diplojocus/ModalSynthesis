@@ -14,6 +14,7 @@
 //==============================================================================
 TimeView::TimeView()
 {
+	numSamples = 0;
 	buffer = NULL;
 }
 
@@ -27,6 +28,7 @@ void TimeView::paint (Graphics& g)
 	g.fillAll (Colours::white);
 	if (buffer != NULL)
 	{
+		g.setColour(Colours::blue);
 		for (int i = 0; i < getWidth(); i++)
 		{
 			int index = ((float)i / (float)getWidth()) * numSamples;
@@ -40,7 +42,5 @@ void TimeView::paint (Graphics& g)
 
 void TimeView::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
 }
+
