@@ -19,6 +19,7 @@ public:
 	AudioCore(ChangeListener *listener, const String &filePath);
 	~AudioCore();
 	
+	float sampleRate;
 	uint64 bufferSize;
 	AudioSampleBuffer buffer;
 private:

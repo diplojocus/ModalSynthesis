@@ -15,8 +15,8 @@ AudioCore::AudioCore(ChangeListener *listener, const String &filePath):
 	buffer(AudioSampleBuffer(1, 0))
 {
 	addChangeListener(listener);
-
-	bufferSize = 1024;
+	sampleRate = 44100.0f;
+	bufferSize = 8192;
 	
 	File audioFile(filePath);
 	AudioFormatManager formatManager;
