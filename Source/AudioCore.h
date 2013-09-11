@@ -20,8 +20,9 @@ public:
 	~AudioCore();
 	
 	float sampleRate;
-	uint64 bufferSize;
-	AudioSampleBuffer buffer;
+	uint64 fftWindowSize;
+	AudioSampleBuffer sampleInputBuffer;
+	AudioSampleBuffer fftOutputBuffer;
 private:
 };
 
